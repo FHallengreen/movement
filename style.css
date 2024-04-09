@@ -1,0 +1,28 @@
+#gamefield {
+  border: 1px solid chartreuse;
+  width: fit-content;
+  display: grid;
+}
+
+#background {
+  grid-area: 1 / 1;
+  background-color: gray;
+  width: calc(16 * 32px);
+  height: calc(12 * 32px);
+}
+
+#items {
+  grid-area: 1 / 1;
+}
+
+#characters {
+  grid-area: 1 / 1;
+}
+
+#player {
+  width: 46px;
+  aspect-ratio: 16 / 20;
+  background-image: url('images/Character 11.png');
+  background-size: 400% 400%;
+image-rendering: pixelated;
+}
