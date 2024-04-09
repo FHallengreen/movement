@@ -11,7 +11,7 @@ function tick(timestamp) {
 
     const deltaTime = (timestamp - lastTimestamp) / 1000;
     lastTimestamp = timestamp;
-    
+
     movePlayer(deltaTime);
 
     displayPlayerAtPosition();
@@ -19,7 +19,8 @@ function tick(timestamp) {
 
 const player = {
     x: 0,
-    y: 0
+    y: 0,
+    speed: 300
 }
 
 function displayPlayerAtPosition() {
@@ -29,19 +30,19 @@ function displayPlayerAtPosition() {
 
 
 
-function movePlayer() {
+function movePlayer(deltaTime) {
     if (controls.left) {
-        player.x--;
+        player.x -= player.speed * deltaTime;
     }
     else if (controls.right) {
-        player.x++;
+        player.x += player.speed * deltaTime;
     }
 
     if (controls.up) {
-        player.y--;
+        player.y -= player.speed * deltaTime
     }
     else if (controls.down) {
-        player.y++;
+        player.y += player.speed * deltaTime
     }
 }
 

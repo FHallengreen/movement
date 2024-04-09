@@ -24,5 +24,21 @@
   aspect-ratio: 16 / 20;
   background-image: url('images/Character 11.png');
   background-size: 400% 400%;
-image-rendering: pixelated;
+  image-rendering: pixelated;
+
+  background-position: -100% 0%;
+
+  animation-name: down;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(4);
+}
+
+@keyframes down {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: -400% 0%;
+  }
 }
