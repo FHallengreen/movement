@@ -26,13 +26,31 @@
   background-size: 400% 400%;
   image-rendering: pixelated;
 
-  background-position: -100% 0%;
+}
 
-  animation-name: down;
+.animate {
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-timing-function: steps(4);
 }
+
+.down {
+  background-position: 0% 0%;
+  animation-name: down;
+}
+.up {
+  background-position: 0% 0%;
+  animation-name: up;
+}
+.left {
+  background-position: 0% 0%;
+  animation-name: left;
+}
+.right {
+  background-position: 0% 0%;
+  animation-name: right;
+}
+
 
 @keyframes down {
   from {
@@ -40,5 +58,29 @@
   }
   to {
     background-position: -400% 0%;
+  }
+}
+@keyframes up {
+  from {
+    background-position: 0% -100%;
+  }
+  to {
+    background-position: -400% -100%;
+  }
+}
+@keyframes left {
+  from {
+    background-position: 0% 200%;
+  }
+  to {
+    background-position: -400% 200%;
+  }
+}
+@keyframes right {
+  from {
+    background-position: 0% 100%;
+  }
+  to {
+    background-position: 400% 100%;
   }
 }

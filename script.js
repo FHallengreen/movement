@@ -1,5 +1,4 @@
 function start() {
-    console.log("JS is running");
     document.addEventListener("keydown", keyPress)
     document.addEventListener("keyup", logKey)
     requestAnimationFrame(tick);
@@ -15,12 +14,26 @@ function tick(timestamp) {
     movePlayer(deltaTime);
 
     displayPlayerAtPosition();
+    displayPlayerAnimation();
+}
+
+function displayPlayerAnimation() {
+    const visualPlayer = document.querySelector("#player");
+    if (player.moving) {
+        visualPlayer.classList.add("animate");
+        visualPlayer.classList.remove("up", "down", "left", "right");
+        visualPlayer.classList.add(player.direction);
+    } else {
+        visualPlayer.classList.remove("animate")
+    }
 }
 
 const player = {
     x: 0,
     y: 0,
-    speed: 300
+    speed: 100,
+    moving: false,
+    direction: undefined,
 }
 
 function displayPlayerAtPosition() {
@@ -31,18 +44,59 @@ function displayPlayerAtPosition() {
 
 
 function movePlayer(deltaTime) {
+    player.moving = false;
+
+    // Vi starter med at oprette en vektor for bevægelse
+    let moveX = 0;
+    let moveY = 0;
+
     if (controls.left) {
-        player.x -= player.speed * deltaTime;
+        moveX -= 1;
+        player.moving = true;
+        player.direction = "left";
     }
-    else if (controls.right) {
-        player.x += player.speed * deltaTime;
+    if (controls.right) {
+        moveX += 1;
+        player.moving = true;
+        player.direction = "right";
+    }
+    if (controls.up) {
+        moveY -= 1;
+        player.moving = true;
+        player.direction = "up";
+    }
+    if (controls.down) {
+        moveY += 1;
+        player.moving = true;
+        player.direction = "down";
     }
 
-    if (controls.up) {
-        player.y -= player.speed * deltaTime
+    // Vi normaliserer bevægelsesvektoren, så dens samlede længde er 1 eller mindre
+    const magnitude = Math.sqrt(moveX * moveX + moveY * moveY);
+    if (magnitude > 0) {
+        moveX /= magnitude;
+        moveY /= magnitude;
     }
-    else if (controls.down) {
-        player.y += player.speed * deltaTime
+
+    // Vi anvender nu den normaliserede vektor til at opdatere positionen
+    const newPos = {
+        x: player.x + (moveX * player.speed * deltaTime),
+        y: player.y + (moveY * player.speed * deltaTime),
+    }
+
+    if (canMoveTo(newPos)) {
+        player.x = newPos.x;
+        player.y = newPos.y;
+    }
+}
+
+
+function canMoveTo(pos) {
+    if (pos.x < 0 || pos.y < 0 || pos.x > 470 || pos.y > 325) {
+        return false;
+    }
+    else {
+        return true;
     }
 }
 
