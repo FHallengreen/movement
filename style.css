@@ -6,13 +6,55 @@
 
 #background {
   grid-area: 1 / 1;
-  background-color: gray;
-  width: calc(16 * 32px);
-  height: calc(12 * 32px);
+  display: grid;
+  grid-template-columns: repeat(var(--GRID_WIDTH), var(--TILE_SIZE));
+  grid-template-rows: repeat(var(--GRID_HEIGHT), var(--TILE_SIZE));
+}
+
+#background .tile {
+  width: var(--TILE_SIZE);
+  aspect-ratio: 1 / 1;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  image-rendering: pixelated;
+  background-image: url('images/tiles/grass.png');
+}
+
+#background .path {
+  background-image: url('images/tiles/path.png');
+}
+
+#background .water {
+  background-image: url('images/tiles/water.png');
+}
+#background .chest_closed {
+  background-image: url('images/items/chest_closed.png');
+  background-color: rgb(198, 129, 62);
+}
+
+#background .door {
+  background-image: url('images/tiles/door.png');
+}
+#background .floor_wood {
+  background-image: url('images/tiles/floor_wood.png');
+}
+#background .wall {
+  background-image: url('images/tiles/wall.png');
+}
+#background .lava {
+  background-image: url('images/tiles/lava.png');
+}
+#background .tree {
+  background-image: url('images/tiles/tree.png');
 }
 
 #items {
   grid-area: 1 / 1;
+}
+
+.highlight {
+  outline: 2px dashed yellow;
+  translate: 0 0;
 }
 
 #characters {
@@ -20,12 +62,11 @@
 }
 
 #player {
-  width: 46px;
+  width: 32px;
   aspect-ratio: 16 / 20;
-  background-image: url('images/Character 11.png');
+  background-image: url('images/character/Character 11.png');
   background-size: 400% 400%;
   image-rendering: pixelated;
-
 }
 
 .animate {
@@ -50,7 +91,6 @@
   background-position: 0% 0%;
   animation-name: right;
 }
-
 
 @keyframes down {
   from {
@@ -83,4 +123,8 @@
   to {
     background-position: 400% 100%;
   }
+}
+
+.show-rect {
+  outline: 2px solid red;
 }
